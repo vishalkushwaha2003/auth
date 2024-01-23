@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ font-family: 'Poppins', sans-serif;
+
+}
+.parent{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(222, 227, 230);
+}
+
+.card{
+    display: grid;
+    padding: 50px;
+    height: 350px;
+    width: 250px;
+    
+    border-radius: 10px;
+    border: 0;
+    margin-bottom: 20px;
+    background-color: rgb(222, 227, 230);
+    box-shadow:inset -5px -5px 10px  rgb(251, 249, 249),inset 5px 5px 8px  rgb(115, 112, 112) ;
+    
+    
+    
+}
+.card>*{
+    margin: 1px;
+   
+    border-radius: 5px;
+
+}
+
+.neumorphism-1,.neumorphism-2{
+border: 0;
+height: 100px;
+margin-bottom: 0;
+background-color: rgb(222, 227, 230);
+box-shadow: -5px -5px 10px  rgb(251, 249, 249), 5px 5px 8px  rgb(115, 112, 112) ;
+
+
+}
+.neumorphism-1{
+    font-weight:bolder;
+    color: rgb(7, 88, 146);
+    transition: 0.1s;
+}
+.neumorphism-1:hover{
+    scale: 1.035;
+}
+.neumorphism-2{
+    font-weight:bolder;
+    color: rgb(244, 48, 22);
+    transition: 0.1s;
+}
+.neumorphism-2:hover{
+    scale: 1.035;
+}

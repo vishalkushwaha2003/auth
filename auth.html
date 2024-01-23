@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>  
+       <div class="parent">
+       <div class="card ">
+        <button id="signInButton" class="neumorphism-1">signin</button>
+       <button id="signOutButton" class="neumorphism-2">signout</button>
+       
+        <div id="name" ></div>
+       <!-- <div id="email" ></div> -->
+      
+       
+       </div>
+       </div>
+
+
+       <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-analytics.js";
+        import { getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyBpDdQQ66nf8rFqRIE7yql7Y8XAAdjgTjA",
+          authDomain: "auth-1f702.firebaseapp.com",
+          projectId: "auth-1f702",
+          storageBucket: "auth-1f702.appspot.com",
+          messagingSenderId: "66321013195",
+          appId: "1:66321013195:web:8b5ac1509ab1a530423e4e",
+          measurementId: "G-BDFCNPB34X"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth=getAuth();
+        const provider= new GoogleAuthProvider();
+
+        const signInButton=document.getElementById("signInButton");
+        const signOutButton=document.getElementById("signOutButton");
+        const name=document.getElementById("name");
+        // const email=document.getElementById("email");
+        
+        name.style.display="none";
+        // email.style.display="none";
+        signOutButton.style.display="none";
+        const userSignIn =async()=>{
+            signInWithPopup(auth,provider)
+            .then((result)=>{
+                const user =result.user
+                consol.log(user);
+            }).catch((error)=>{
+                const errorCode=error.code;
+                const errorMessage=error.message;
+            })
+        }
+
+        const userSignOut=async()=>{
+            signOut(auth).then(()=>{
+            name.style.boxShadow=" -5px -5px 10px  rgb(251, 249, 249), 5px 5px 8px  rgb(115, 112, 112) ";
+            name.style.display="flex";
+            name.style.justifyContent="center";
+            name.style.alignItems="center";
+            name.style.fontWeight="600";
+            name.style.height="20px";
+            name.innerHTML="&#128534";
+            }).catch((error)=>{})
+                 
+        }
+
+       onAuthStateChanged(auth,(user)=>{
+        if(user){
+            signOutButton.style.display="block";
+            signInButton.style.display="none";
+            name.style.boxShadow=" -5px -5px 10px  rgb(251, 249, 249), 5px 5px 8px  rgb(115, 112, 112) ";
+            name.style.display="flex";
+            name.style.justifyContent="center";
+            name.style.alignItems="center";
+            name.style.fontWeight="600";
+            name.style.height="20px";
+            
+
+            // email.style.boxShadow=" -5px -5px 10px  rgb(251, 249, 249), 5px 5px 8px  rgb(115, 112, 112) ";
+            // email.style.display="flex";
+            // email.style.justifyContent="center";
+            // email.style.alignItems="center";
+            // email.style.fontWeight="600";
+            // email.style.height="20px"
+
+            name.innerHTML=user.displayName;
+            // email.innerHTML=user.email;
+            
+            
+
+        }
+        else{
+            signOutButton.style.display="none";
+            signInButton.style.display="block";
+            name.style.display="none";
+            email.style.display="none";
+        }
+       })
+
+       signInButton.addEventListener('click', userSignIn);
+       signOutButton.addEventListener("click",userSignOut);
+      </script>
+        
+</body>
+</html>
